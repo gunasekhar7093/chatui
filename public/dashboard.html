@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body id="body">
+
+
+<!-- Top Bar -->
+
+<div class="topbar">
+
+<div class="tabs">
+
+<button onclick="showProfile()">My Profile</button>
+
+<button onclick="showChats()">Chats</button>
+
+<button onclick="showUsers()">Other Users</button>
+
+</div>
+
+
+<div>
+
+<button class="darkToggle" onclick="toggleMode()">
+🌙
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- Main Content -->
+
+<div class="content">
+
+
+<!-- Profile Section -->
+
+<div id="profileSection">
+
+<h2>My Profile</h2>
+
+<div id="profileData"></div>
+
+<br>
+
+<button onclick="logout()" class="logoutBtn">
+Logout
+</button>
+
+</div>
+
+
+
+<!-- Chats Section -->
+
+<div id="chatsSection" style="display:none;">
+
+<h2>Chats</h2>
+
+<div id="chatList"></div>
+
+</div>
+
+
+
+<!-- Users Section -->
+
+<div id="usersSection" style="display:none;">
+
+<h2>Other Users</h2>
+
+<div id="usersList"></div>
+
+</div>
+
+
+
+<!-- Chat Screen -->
+
+<div id="chatSection" style="display:none;">
+
+<h2 id="chatUserName">Chat</h2>
+
+
+<div id="messagesBox" class="messagesBox"></div>
+
+
+<br>
+
+<div class="inputArea">
+
+<textarea
+id="messageInput"
+placeholder="Type a message"
+></textarea>
+
+<button
+class="sendBtn"
+onclick="sendMessage()">
+
+➤
+
+</button>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>

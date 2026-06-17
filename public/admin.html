@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin Login</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+background:#f0f2f5;
+text-align:center;
+margin-top:100px;
+
+}
+
+input{
+
+padding:10px;
+margin:10px;
+width:250px;
+
+}
+
+button{
+
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Admin Login</h2>
+
+<input
+id="email"
+placeholder="Email">
+
+<br>
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<br>
+
+<button onclick="login()">
+Login
+</button>
+
+
+<script>
+
+async function login(){
+
+const email=
+document.getElementById("email").value;
+
+const password=
+document.getElementById("password").value;
+
+
+const res=await fetch(
+"/api/admin/login",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+email,
+password
+})
+
+});
+
+
+const data=await res.json();
+
+localStorage.setItem(
+"adminToken",
+data.token
+);
+
+window.location=
+"adminDashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
