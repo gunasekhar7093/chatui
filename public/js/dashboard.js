@@ -130,7 +130,7 @@ updateWelcomeScreen();
 async function loadProfile(){
 
 const response=await fetch(
-"http://localhost:5000/api/dashboard",
+"/api/dashboard",
 {
 headers:{Authorization:"Bearer "+token}
 });
@@ -252,7 +252,7 @@ ${getStatus(currentChatUserId)}
 async function loadUsers(){
 
 const response=await fetch(
-"http://localhost:5000/api/users",
+"/api/users",
 {
 headers:{Authorization:"Bearer "+token}
 });
@@ -294,7 +294,7 @@ document.getElementById("usersList").innerHTML=html;
 async function loadChats(){
 
 const response=await fetch(
-"http://localhost:5000/api/chat",
+"/api/chat",
 {
 headers:{Authorization:"Bearer "+token}
 });
@@ -407,7 +407,7 @@ document.getElementById("chatList").innerHTML=html;
 async function startChat(userId,userName){
 
 const response=await fetch(
-"http://localhost:5000/api/chat",
+"/api/chat",
 {
 method:"POST",
 
@@ -503,7 +503,7 @@ async function loadMessages(){
 if(!selectedChatId) return;
 
 const response=await fetch(
-"http://localhost:5000/api/message/"+selectedChatId,
+"/api/message/"+selectedChatId,
 {
 headers:{Authorization:"Bearer "+token}
 });
@@ -624,7 +624,7 @@ if(!text) return;
 socket.emit("stop typing",myId);
 
 const response=await fetch(
-"http://localhost:5000/api/message",
+"/api/message",
 {
 method:"POST",
 

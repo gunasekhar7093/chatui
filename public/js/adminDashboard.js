@@ -9,7 +9,7 @@ async function loadUsers() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/users",
+      "/api/admin/users",
       {
         headers: {
           Authorization: "Bearer " + token
@@ -70,7 +70,7 @@ async function deleteUser(id) {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/users/" + id,
+      "/api/admin/users/" + id,
       {
         method: "DELETE",
         headers: {
