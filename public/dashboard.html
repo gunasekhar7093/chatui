@@ -1,132 +1,122 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
-
-<link rel="stylesheet" href="css/dashboard.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Secure Chat</title>
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
-
 <body id="body">
 
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar-panel">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="header-profile">
+          <div class="avatar-circle" id="userAvatarPlaceholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div class="profile-text">
+            <h3 id="sidebarDisplayName">Loading...</h3>
+            <span class="user-status-badge"><span class="badge-dot"></span>Online</span>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <button class="darkToggle" onclick="toggleMode()" title="Toggle Dark Mode">
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
 
-<!-- Top Bar -->
+      <!-- Navigation Tabs -->
+      <div class="tabs">
+        <button id="tabChatsBtn" onclick="showChats()" class="tab-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Chats
+        </button>
+        <button id="tabUsersBtn" onclick="showUsers()" class="tab-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Users
+        </button>
+        <button id="tabProfileBtn" onclick="showProfile()" class="tab-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Profile
+        </button>
+      </div>
 
-<div class="topbar">
+      <!-- Lists -->
+      <div class="sidebar-content">
+        <!-- Chats Section -->
+        <div id="chatsSection">
+          <div id="chatList" class="list-container"></div>
+        </div>
 
-<div class="tabs">
+        <!-- Users Section -->
+        <div id="usersSection" style="display:none;">
+          <div id="usersList" class="list-container"></div>
+        </div>
+      </div>
+    </aside>
 
-<button onclick="showProfile()">My Profile</button>
+    <!-- Main Content Panel -->
+    <main class="main-panel">
+      <!-- Welcome Section -->
+      <div id="welcomeSection" class="welcome-container">
+        <div class="welcome-inner">
+          <div class="welcome-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <h2>Start Messaging</h2>
+          <p>Select a contact from your Chats or search for Users to begin a conversation.</p>
+        </div>
+      </div>
 
-<button onclick="showChats()">Chats</button>
+      <!-- Profile Section -->
+      <div id="profileSection" style="display:none;" class="profile-container">
+        <div class="profile-card">
+          <div class="profile-card-header">
+            <div class="large-avatar">👤</div>
+            <h2>Account Profile</h2>
+            <p>Manage your account credentials and logout securely</p>
+          </div>
+          <div id="profileData" class="profile-details"></div>
+          <button onclick="logout()" class="logoutBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            Logout Account
+          </button>
+        </div>
+      </div>
 
-<button onclick="showUsers()">Other Users</button>
+      <!-- Chat Section -->
+      <div id="chatSection" style="display:none;" class="chat-container">
+        <!-- Chat Area Header -->
+        <div class="chat-header-bar">
+          <button class="back-btn" onclick="backToSidebar()" title="Back to Lists">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          
+          <div class="chat-header-details">
+            <div id="chatUserName" class="chat-user-title">Chat</div>
+          </div>
+        </div>
 
-</div>
+        <!-- Messages Box -->
+        <div id="messagesBox" class="messagesBox"></div>
 
+        <!-- Chat Input Panel -->
+        <div class="inputArea">
+          <textarea id="messageInput" placeholder="Type a message..." rows="1"></textarea>
+          <button class="sendBtn" onclick="sendMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
 
-<div>
-
-<button class="darkToggle" onclick="toggleMode()">
-🌙
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- Main Content -->
-
-<div class="content">
-
-
-<!-- Profile Section -->
-
-<div id="profileSection">
-
-<h2>My Profile</h2>
-
-<div id="profileData"></div>
-
-<br>
-
-<button onclick="logout()" class="logoutBtn">
-Logout
-</button>
-
-</div>
-
-
-
-<!-- Chats Section -->
-
-<div id="chatsSection" style="display:none;">
-
-<h2>Chats</h2>
-
-<div id="chatList"></div>
-
-</div>
-
-
-
-<!-- Users Section -->
-
-<div id="usersSection" style="display:none;">
-
-<h2>Other Users</h2>
-
-<div id="usersList"></div>
-
-</div>
-
-
-
-<!-- Chat Screen -->
-
-<div id="chatSection" style="display:none;">
-
-<h2 id="chatUserName">Chat</h2>
-
-
-<div id="messagesBox" class="messagesBox"></div>
-
-
-<br>
-
-<div class="inputArea">
-
-<textarea
-id="messageInput"
-placeholder="Type a message"
-></textarea>
-
-<button
-class="sendBtn"
-onclick="sendMessage()">
-
-➤
-
-</button>
-
-</div>
-
-</div>
-
-
-
-</div>
-
-
-<script src="/socket.io/socket.io.js"></script>
-
-<script src="js/dashboard.js"></script>
-
-
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
-
 </html>

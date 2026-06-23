@@ -1,109 +1,211 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Secure Chat</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-normal);
+    }
+    
+    .header {
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .header-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .header-title svg {
+      color: var(--primary);
+    }
+    
+    .logoutBtn {
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+    
+    .logoutBtn:hover {
+      background-color: var(--border-color);
+      transform: translateY(-1px);
+    }
+    
+    .logoutBtn:active {
+      transform: translateY(1px);
+    }
 
-<style>
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    
+    .table-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    
+    th, td {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+    
+    th {
+      background-color: var(--bg-app);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr {
+      transition: background-color var(--transition-fast);
+    }
+    
+    tr:hover {
+      background-color: rgba(99, 102, 241, 0.02);
+    }
+    
+    .deleteBtn {
+      background-color: var(--danger);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast);
+    }
+    
+    .deleteBtn:hover {
+      background-color: var(--danger-hover);
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.15);
+    }
 
-body{
-font-family:Arial;
-background:#f0f2f5;
-margin:0;
-}
-
-.header{
-background:#007bff;
-color:white;
-padding:15px;
-font-size:20px;
-}
-
-.container{
-padding:20px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-background:white;
-}
-
-th,td{
-padding:12px;
-border-bottom:1px solid #ddd;
-text-align:left;
-}
-
-th{
-background:#007bff;
-color:white;
-}
-
-.deleteBtn{
-background:red;
-color:white;
-border:none;
-padding:8px 15px;
-cursor:pointer;
-border-radius:5px;
-}
-
-.logoutBtn{
-float:right;
-background:white;
-color:#007bff;
-border:none;
-padding:8px 15px;
-cursor:pointer;
-border-radius:5px;
-}
-
-</style>
-
+    .deleteBtn:active {
+      transform: scale(0.97);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+      }
+      th, td {
+        padding: 14px 16px;
+      }
+    }
+  </style>
 </head>
+<body id="body">
 
-<body>
+  <div class="header">
+    <div class="header-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      Admin Portal
+    </div>
+    
+    <button class="logoutBtn" onclick="logout()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      Logout
+    </button>
+  </div>
 
-<div class="header">
+  <div class="container">
+    <h2>All Registered Users</h2>
+    
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Join Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="usersTable">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-Admin Panel
-
-<button class="logoutBtn" onclick="logout()">
-Logout
-</button>
-
-</div>
-
-
-<div class="container">
-
-<h2>All Users</h2>
-
-<table>
-
-<thead>
-
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Join Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody id="usersTable">
-
-</tbody>
-
-</table>
-
-</div>
-
-
-<script src="js/adminDashboard.js"></script>
-
+  <script src="js/adminDashboard.js"></script>
 </body>
-
 </html>

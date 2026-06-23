@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Common variables */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --sidebar-width: 360px;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  /* Light Mode Palette */
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-chat-area: #f1f5f9;
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  
+  --border-color: #e2e8f0;
+  --border-focus: #6366f1;
+  
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-active: #3730a3;
+  --primary-light: #eeebff;
+  
+  --accent: #8b5cf6;
+  --accent-light: #f5f3ff;
+  
+  --success: #10b981;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --warning: #f59e0b;
+  
+  /* Message bubbles light */
+  --bubble-my-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --bubble-my-text: #ffffff;
+  --bubble-my-time: rgba(255, 255, 255, 0.8);
+  --bubble-other-bg: #ffffff;
+  --bubble-other-text: #0f172a;
+  --bubble-other-time: #94a3b8;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(99, 102, 241, 0.05), 0 4px 6px -2px rgba(99, 102, 241, 0.02);
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.03), 0 5px 15px -5px rgba(0, 0, 0, 0.02);
+  
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-track: transparent;
+}
+
+/* Dark Mode Variables mapped to body.dark */
+#body.dark, body.dark {
+  --bg-app: #090d16;
+  --bg-sidebar: #0f172a;
+  --bg-card: #1e293b;
+  --bg-chat-area: #0b0f19;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+  
+  --border-color: #334155;
+  --border-focus: #818cf8;
+  
+  --primary: #6366f1;
+  --primary-hover: #818cf8;
+  --primary-active: #4f46e5;
+  --primary-light: #252849;
+  
+  --accent: #a78bfa;
+  --accent-light: #2e2652;
+  
+  --success: #34d399;
+  --danger: #f87171;
+  --danger-hover: #ef4444;
+  
+  /* Message bubbles dark */
+  --bubble-my-bg: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+  --bubble-my-text: #ffffff;
+  --bubble-my-time: rgba(255, 255, 255, 0.85);
+  --bubble-other-bg: #1e293b;
+  --bubble-other-text: #f8fafc;
+  --bubble-other-time: #64748b;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+  
+  --scrollbar-thumb: #475569;
+  --scrollbar-track: transparent;
+}

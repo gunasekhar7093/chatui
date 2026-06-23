@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Login</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Secure Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body id="body">
+  <div class="container">
+    <h2>Chat App</h2>
+    <p style="margin-top:-15px; margin-bottom: 25px; font-size: 14px;">Sign in to your account to continue chatting</p>
+    
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <input id="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+    </div>
+    
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+    </div>
+    
+    <button onclick="loginUser()">
+      Sign In
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </button>
+    
+    <p>
+      Don't have an account? 
+      <a href="register.html">Create Account</a>
+    </p>
+  </div>
 
-<body>
-
-<div class="container">
-
-<h2>Chat App Login</h2>
-
-<input id="email" type="email" placeholder="Enter Email">
-
-<input id="password" type="password" placeholder="Enter Password">
-
-<button onclick="loginUser()">Login</button>
-
-<p>
-Don't have account?
-<a href="register.html">Register</a>
-</p>
-
-</div>
-
-<script src="js/login.js"></script>
-
+  <script src="js/login.js"></script>
 </body>
-
 </html>

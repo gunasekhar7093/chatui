@@ -11,7 +11,50 @@ let myId=null;
 let currentChatUserId=null;
 
 if(!token){
-window.location="login.html";
+window.location="index.html";
+}
+
+let activeSidebarTab = "chatsSection";
+let showingProfile = true;
+
+// Tab Highlighting helper
+function highlightTab(tabBtnId) {
+  document.getElementById("tabChatsBtn").classList.remove("active");
+  document.getElementById("tabUsersBtn").classList.remove("active");
+  document.getElementById("tabProfileBtn").classList.remove("active");
+  if (tabBtnId) {
+    document.getElementById(tabBtnId).classList.add("active");
+  }
+}
+
+// Back to sidebar layout on mobile
+function backToSidebar() {
+  document.body.classList.remove("chat-open");
+  document.body.classList.remove("profile-open");
+  
+  if (activeSidebarTab === "chatsSection") {
+    showChats();
+  } else {
+    showUsers();
+  }
+}
+
+// Manage welcome splash screen display state
+function updateWelcomeScreen() {
+  const profileSection = document.getElementById("profileSection");
+  const chatSection = document.getElementById("chatSection");
+  const welcomeSection = document.getElementById("welcomeSection");
+  
+  if (!welcomeSection) return;
+  
+  const profileVisible = profileSection && profileSection.style.display !== "none" && profileSection.style.display !== "";
+  const chatVisible = chatSection && chatSection.style.display !== "none" && chatSection.style.display !== "";
+  
+  if (profileVisible || chatVisible) {
+    welcomeSection.style.display = "none";
+  } else {
+    welcomeSection.style.display = "flex";
+  }
 }
 
 showProfile();
@@ -20,20 +63,40 @@ showProfile();
 // Tabs
 
 function showProfile(){
-hideAll();
-document.getElementById("profileSection").style.display="block";
+  showingProfile = true;
+  hideAll();
+  document.getElementById("profileSection").style.display="flex";
+  highlightTab("tabProfileBtn");
+  
+  document.body.classList.add("profile-open");
+  document.body.classList.remove("chat-open");
+  updateWelcomeScreen();
 }
 
 function showChats(){
-hideAll();
-document.getElementById("chatsSection").style.display="block";
-loadChats();
+  showingProfile = false;
+  activeSidebarTab = "chatsSection";
+  hideAll();
+  document.getElementById("chatsSection").style.display="block";
+  highlightTab("tabChatsBtn");
+  
+  document.body.classList.remove("profile-open");
+  document.body.classList.remove("chat-open");
+  updateWelcomeScreen();
+  loadChats();
 }
 
 function showUsers(){
-hideAll();
-document.getElementById("usersSection").style.display="block";
-loadUsers();
+  showingProfile = false;
+  activeSidebarTab = "usersSection";
+  hideAll();
+  document.getElementById("usersSection").style.display="block";
+  highlightTab("tabUsersBtn");
+  
+  document.body.classList.remove("profile-open");
+  document.body.classList.remove("chat-open");
+  updateWelcomeScreen();
+  loadUsers();
 }
 
 
@@ -46,9 +109,17 @@ socket.emit("leave chat",myId);
 }
 
 document.getElementById("profileSection").style.display="none";
-document.getElementById("usersSection").style.display="none";
 document.getElementById("chatSection").style.display="none";
-document.getElementById("chatsSection").style.display="none";
+
+if (window.innerWidth <= 768) {
+  document.getElementById("usersSection").style.display="none";
+  document.getElementById("chatsSection").style.display="none";
+} else {
+  document.getElementById("usersSection").style.display = activeSidebarTab === "usersSection" ? "block" : "none";
+  document.getElementById("chatsSection").style.display = activeSidebarTab === "chatsSection" ? "block" : "none";
+}
+
+updateWelcomeScreen();
 
 }
 
@@ -67,6 +138,9 @@ headers:{Authorization:"Bearer "+token}
 const data=await response.json();
 
 myId=data.user._id;
+
+// Populate profile name in header and display
+document.getElementById("sidebarDisplayName").innerText = data.user.name;
 
 document.getElementById("profileData").innerHTML=`
 
@@ -361,8 +435,10 @@ hideAll();
 
 selectedChatId=chatId;
 currentChatUserId=userId;
+showingProfile = false;
 
-document.getElementById("chatSection").style.display="block";
+document.getElementById("chatSection").style.display="flex";
+document.body.classList.add("chat-open");
 
 document.getElementById("chatUserName").innerHTML=`
 ${userName}
@@ -373,6 +449,8 @@ ${getStatus(userId)}
 socket.emit("join chat",chatId,myId);
 
 socket.emit("messages seen",chatId,myId);
+
+updateWelcomeScreen();
 
 loadMessages();
 
@@ -604,7 +682,7 @@ loadChats();
 
 function logout(){
 localStorage.removeItem("token");
-window.location="login.html";
+window.location="index.html";
 }
 
 
